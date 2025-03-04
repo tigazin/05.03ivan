@@ -1,0 +1,29 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="container">
+    <div class="resource_box">
+        <a href="http://www.linkedin.com/" class="resource img-box"><img class="img-3" src="{% static 'app/content/img/logo1.png' %}" alt="Alternate Text" /> <div class="text">Linkedin</div></a>
+        <a href="http://www.glassdoor.com/" class="resource img-box"><img class="img-3 img-2" src="{% static 'app/content/img/logo2.png' %}" alt="Alternate Text" /><div class="text">glassdoor</div></a>
+        <a href="http://www.indeed.com/" class="resource img-box"><img class="img-3"  src="{% static 'app/content/img/logo3.webp' %}" alt="Alternate Text" /><div class="text">indeed</div></a>
+    </div>
+</div>
+<style>
+    .img-box{
+        height:200px;
+    }
+    .img-2 {
+        height: 80px;
+        margin-top:50px;
+    }
+    .resource .text{
+        margin-top:auto;
+    }
+    .resource {
+        border:1px solid gray;
+        border-radius:15px;
+        padding:5px;
+    }
+</style>
+{% endblock %}

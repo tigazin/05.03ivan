@@ -1,0 +1,97 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Мастер на все руки</h1>
+
+    <p class="lead">Мы красавчики - мы надежный выбор </p>
+</div>
+<div class="ind2">
+    <div class="ind3">
+        <h2>уборка квартиры?</h2>
+        <div>Проведем профессиональный клиннинг от 2 часов</div>
+    </div>
+    <div class="ind3">
+        <h2>Лесоповал?</h2>
+        <div></div>
+    </div>
+    <div class="ind3">
+        <h2>Личный водитель</h2>
+        <div>Найти от 1000 рублей в день</div>
+    </div>
+</div>
+
+
+<div class="slider">
+    <div class="slides">
+        <div class="slide"><img src="https://avatars.mds.yandex.net/get-altay/11383855/2a0000018caf41f0923864f7eb255589c190/XXL_height" alt="Image 1"></div>
+        <div class="slide"><img src="https://www.calltouch.ru/blog/wp-content/uploads/2020/01/hiring-1977803_1280.jpg" alt="Image 2"></div>
+        <div class="slide"><img src="https://avatars.mds.yandex.net/i?id=4dad3b72bb14864f8d5df5673abf9aed_l-5297283-images-thumbs&n=13" alt="Image 3"></div>
+    </div>
+    <div class="controls">
+        <button class="control prev">&#10094;</button>
+        <button class="control next">&#10095;</button>
+    </div>
+</div>
+
+
+<style>
+
+    .Pdown {
+        margin-top: auto;
+    }
+
+    .jumbotron {
+        background-color: #B39F7A;
+        border-radius: 15px;
+    }
+
+    .ind2 {
+        height: 300px;
+        width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between
+    }
+
+    .ind3 {
+        width: 300px;
+        height: 100%;
+        background-color: #FAE7B5;
+        border-radius: 10px;
+        padding: 0 10px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        const $slides = $('.slides');
+        const $slide = $('.slide');
+        const slideCount = $slide.length;
+        let currentIndex = 0;
+
+        // Функция обновления положения слайдера
+        function updateSlider() {
+            const offset = -currentIndex * 100;
+            $slides.css('transform', `translateX(${offset}%)`);
+        }
+
+        // Обработчики для кнопок
+        $('.next').click(function () {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlider();
+        });
+
+        $('.prev').click(function () {
+            currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+            updateSlider();
+        });
+
+        // Автоматическая смена слайдов каждые 5 секунд
+        setInterval(function () {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlider();
+        }, 5000);
+    });
+</script>
+{% endblock %}

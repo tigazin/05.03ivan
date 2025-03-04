@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Django Application</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+</head>
+
+<body>
+    <div class="navbar-mini">
+
+        <a href="/" class="logo-main"><div> <img src="{% static 'app/content/img/logo.png' %}" alt="logo" /></div> </a>
+        {% include 'app/loginpartial.html' %}
+    </div>
+    <div class="navbar-cus">
+        <ul class="ul-head">
+
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'contact' %}">Контакты</a></li>
+            <li><a href="{% url 'links' %}">Полезные ресурсы</a></li>
+            <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+            <li><a href="{% url 'blog' %}">Блог</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'product_list' %}">Услуги</a></li>
+            {% endif %}
+            {%if user.is_superuser or is_manager_or_admin%}
+            <li>
+                <a href="{%url 'newpost'%}">Добавить статью</a>
+            </li>
+            <li>
+                <a href="{%url 'manage_products'%}">Управление товарами</a>
+            </li>
+            <li>
+                <a href="{%url 'manage_orders'%}">Управление заказами</a>
+            </li>
+            {% endif %}
+            {%if user.is_superuser or is_admin%}
+            <li>
+                <a href="{%url 'manage_users'%}">Управление пользователями</a>
+            </li>
+            {% endif %}
+            <li><a href="{%url 'videopost'%}">Видео</a></li>
+            {% if not user.is_authenticated %}
+            <li><a href="{% url 'registration' %}">Регистрация</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="img-li">
+                <a href="{%url 'cart'%}">корзина <img class="img-head" src="{% static 'app/content/img/cart.png' %}" alt="Alternate Text" /></a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </div>
+
+    <div class="container-cus">
+{% block content %}{% endblock %}
+       
+      
+    </div>
+    <style>
+        .button-cus {
+            border: none;
+            border-radius: 25px;
+            background-color: #EAE0C8;
+            color: white;
+        }
+        input:focus {
+            outline: none;
+            border: 1px solid gray;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border: 1px solid gray;
+        }
+        input {
+            border: 1px solid gray;
+            border-radius: 15px;
+            padding-left: 10px;
+        }
+        textarea {
+            border: 1px solid gray;
+            border-radius: 15px;
+            padding-left:10px;
+        }
+        #id_image {
+            border: none
+        }
+        .img-li{
+            display:flex;
+           
+        
+            }
+        .img-head{
+            width:25px;
+            height:25px;
+           
+        }
+
+        .navbar-mini {
+            width: 100%;
+            height: 50px;
+            background-color: #B39F7A;
+        }
+        div, h1, h2, h3 {
+            color: white;
+        }
+        .NV{
+            width:1200px;
+            margin:0 auto;
+        }
+        body {
+            background-color: #EAE0C8;
+        }
+        .Orange {
+            background-color: #569edd;
+            border-color: #569edd;
+        }
+        .navbar-cus {
+            width: 100%;
+            height: 60px;
+            background-color: #B39F7A;
+        }
+        .container-cus {
+            width:100%;
+            
+            padding-left:15px;
+            padding-top:15px;
+            box-sizing:border-box;
+        }
+        .ul-head{
+            width:1500px;
+            display:flex;
+            flex-direction:row;
+            padding:0px;
+            margin:0 auto;
+            height:100%;
+            flex-wrap: wrap;
+
+        }
+            .ul-head li {
+                list-style: none;
+                font-size: 14px;
+                text-align:center;
+                padding:0px 5px;
+                height:100%;
+                display:flex;
+                align-items:center;
+                
+            }
+                .ul-head li:hover {
+                    background-color: coral;
+
+                }
+            .ul-head a {
+                width:max-content;
+                color: white;
+                padding-left: 0px;
+                display:block;
+                text-decoration:none;
+            }
+            .logo-main {
+                float:left;
+               width:100px;
+                height: 50px;
+                display: block;
+            }
+        .logo-main div{
+
+            width:60px;
+            height:50px;
+           margin:0 auto;
+        }
+        .logo-main img{
+            width:100%;
+            height:100%;
+        }
+        .nav-content{
+            width:200px;
+           
+            margin:0 auto;
+        }
+
+        .logoutForm {
+            float: right;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            color: white;
+            text-align: center;
+            gap:10px;
+        }
+        .log-out{
+            color:white;
+            
+        }
+        .log-in {
+           
+           
+            float:right;
+            margin-right:15px;
+            display:flex;
+            align-items:center;
+            height:100%;
+            color:white;
+            text-align:center;
+        }
+        .edit_user a {
+            padding: 3px;
+            text-decoration: none;
+        }
+        .edit_user a:hover {
+            color:white;
+        }
+    </style>
+    <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
+    <script src="{% static 'app/scripts/respond.js' %}"></script>
+{% block scripts %}
+    {% endblock %}
+
+</body>
+</html>
